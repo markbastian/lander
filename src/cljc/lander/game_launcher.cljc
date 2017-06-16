@@ -26,5 +26,5 @@
 
 #?(:clj (launch-sketch { :width 800 :height 600 }))
 
-#?(:cljs (defn ^:export launch-app[host width height]
+#?(:cljs (defn ^:export launch[host width height]
            (launch-sketch { :width width :height height :host host})))

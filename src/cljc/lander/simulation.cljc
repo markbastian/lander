@@ -11,7 +11,7 @@
             :state [0 0 400 0 0]
             :theta 0
             :thrust 0
-            :fuel-mass 1
+            :fuel-mass 10
             :max-landing-velocity 10 }})
 
 (defn flatten-landing-zones [terrain lzs]
@@ -40,7 +40,7 @@
         f [(-> theta (* Math/PI) (/ -180) Math/sin (* effective-thrust))
            (+ gravity (-> theta (* Math/PI) (/ -180) Math/cos (* effective-thrust)))]
         v-new (mapv + [(state 3) (state 4)] (map #(* % dt) f))
-        p-new (mapv + [(state 1) (state 2)] (map #(* % dt) v-new))
+        p-new (mapv + [(state 1) (state 2)] (map #(* % dt) [(state 3) (state 4)]))
         new-states (reduce into [dt] [p-new v-new])]
     (-> s
         (into { :time t })
